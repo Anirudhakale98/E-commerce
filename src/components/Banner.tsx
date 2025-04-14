@@ -1,5 +1,5 @@
 "use client";
-import React, { use, useEffect } from "react";
+import React, { useEffect } from "react";
 import { BannerData } from "../../types";
 import { getBannersData } from "@/lib/getData";
 import Image from "next/image";
@@ -9,7 +9,7 @@ import Link from "next/link";
 import FormattedPrice from "./FormattedPrice";
 import { useState } from "react";
 
-const Banner = async () => {
+const Banner = () => {
   const [banners, setBanners] = useState<BannerData[]>([]);
   useEffect(() => {
     const fetchData = async () => {
