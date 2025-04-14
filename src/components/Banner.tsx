@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { use, useEffect } from "react";
 import { BannerData } from "../../types";
 import { getBannersData } from "@/lib/getData";
 import Image from "next/image";
@@ -6,9 +7,18 @@ import { urlFor } from "@/sanity/lib/image";
 import Button from "./Button";
 import Link from "next/link";
 import FormattedPrice from "./FormattedPrice";
+import { useState } from "react";
 
 const Banner = async () => {
-  const banners: BannerData[] = await getBannersData();
+  const [banners, setBanners] = useState<BannerData[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await getBannersData(); // adjust to your API
+      setBanners(res);
+    };
+    fetchData();
+  }
+  , []);
   const singleBanner = banners[0];
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-10 md:max-h-[600px]">
